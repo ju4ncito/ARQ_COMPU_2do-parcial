@@ -13,8 +13,8 @@ int main(){
 
     cout << "Enter pass\n";
    ch = _getch();
-   while(ch != 13){ //character 13 is enter
-    if (ch != 8){
+   while(ch != 13){                     //character 13 es enter
+    if (ch != 8){                       //character 8 es enter
         pass.push_back(ch);
         cout << '*';
 
@@ -39,6 +39,8 @@ int main(){
 
    }
 
+
+   cout <<" que desea hacer!" <<endl;
 }
 
 
