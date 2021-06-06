@@ -9,6 +9,9 @@ using namespace std;
 
 
 void retardo (unsigned long int);
+void mostrar (unsigned char);
+void choque();
+void carrera();
 
 
 int main(){
@@ -21,7 +24,7 @@ int main(){
     cout << "Ingrese su password de 5 digitos: "<<endl;
     ch = _getch();
     while(ch != 13){                        //character 13 es enter
-        if (ch != 8){                       //character 8 es enter
+        if (ch != 8){                       //character 8 es backspace
             pass.push_back(ch);
             cout << '*';
         } else {
@@ -49,7 +52,7 @@ int main(){
     }
 
  //retardo para que se lea bienvenido
-  retardo(1000000000);
+  retardo(100000);
 
 
 
@@ -71,17 +74,16 @@ int main(){
         switch (choice) {
             case 1:
                 system("cls");
-                cout<<"fantastic();";
+                choque();
                 choice = 0;
                 break;
             case 2:
                 system("cls");
-                cout<<"crash()";
                 choice = 0;
                 break;
             case 3:
                 system("cls");
-                cout<<"race()";
+                carrera();
                 choice = 0;
                 break;
             case 4:
@@ -107,4 +109,48 @@ int main(){
 
 void retardo(unsigned long int a){
     while (a) a--;
+}
+
+void mostrar (unsigned char dato){
+
+  for (unsigned char mask = 128; mask > 0; mask>>=1)
+    {
+        if (dato&mask)
+        {
+            cout<<"*";
+        }
+        else {
+            cout<<"_";
+        }
+    }
+}
+
+
+
+void choque (){
+  uint8_t tabla[] = {
+    0x81, 0x42, 0x24, 0x18, 0x18, 0x24, 0x42
+  };
+int j =8;
+do {
+
+  for (int i = 0; i < 7; ++i) {
+    mostrar(tabla[i]);
+    retardo(150000000);
+    system("cls");
+  }
+} while (j==8);
+}
+
+
+void carrera (){
+  uint8_t tabla[] = {
+    0x80, 0x80, 0x40, 0x40, 0x20, 0x20, 0x10, 0x10, 0x88, 0x48, 0x24, 0x14, 0xA, 0x6, 0x3,0x1
+  };
+
+  for (int i = 0; i < 16; ++i) {
+    mostrar(tabla[i]);
+    retardo(150000000);
+    system("cls");
+  }
 }
