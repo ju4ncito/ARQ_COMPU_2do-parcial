@@ -12,12 +12,13 @@ void retardo (unsigned long int);
 void mostrar (unsigned char);
 void choque();
 void carrera();
+void auto_fantastico();
 
 
 int main(){
 
 
-   string pass ="";
+   string pass;
    char ch;
    for (int i=1;i<4;i++){
 
@@ -79,6 +80,7 @@ int main(){
                 break;
             case 2:
                 system("cls");
+                auto_fantastico();
                 choice = 0;
                 break;
             case 3:
@@ -153,4 +155,28 @@ void carrera (){
     retardo(150000000);
     system("cls");
   }
+}
+
+
+
+void auto_fantastico(){
+  unsigned int dato = 0x80; // 1000 0000
+
+  // right shift
+  for (int i = 0; i < 8; ++i) {
+    mostrar(dato);
+    dato >>= 1;
+    retardo(100000000);
+    system("cls");
+  }
+
+
+  dato = 0x02;
+  for (int i = 0; i < 6; ++i) {
+    mostrar(dato);
+    dato <<= 1;
+    retardo(100000000);
+    system("cls");
+  }
+
 }
