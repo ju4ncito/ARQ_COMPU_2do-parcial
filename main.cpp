@@ -15,8 +15,9 @@ void carrera();
 void auto_fantastico();
 void choque_los_5();
 void bateria();
-
-
+unsigned long int speedini = 151000000;
+unsigned long int speed = speedini;
+unsigned long int minspd = 1000000;
 int main(){
 
 
@@ -26,8 +27,8 @@ int main(){
 
     cout << "Ingrese su password de 5 digitos: "<<endl;
     ch = _getch();
-    while(ch != 13){                        //character 13 es enter
-        if (ch != 8){                       //character 8 es backspace
+    while(ch != 13){
+        if (ch != 8){
             pass.push_back(ch);
             cout << '*';
         } else {
@@ -39,7 +40,7 @@ int main(){
         ch = _getch();
    }
     cout <<endl;
-    if(pass == "234"){
+    if(pass == "12345"){
       cout << endl << "Bienvenido al sistema! "<<endl; break;
     }else{
         if (i == 3) {
@@ -53,9 +54,7 @@ int main(){
     }
 
     }
-//retardo para que se lea bienvenido
-  retardo(100000);
-//Estructura switch
+  retardo(380000000);
         int choice = 0;
 
    do {
@@ -76,26 +75,31 @@ int main(){
                 system("cls");
                 choque();
                 choice = 0;
+                speed = speedini;
                 break;
             case 2:
                 system("cls");
                 auto_fantastico();
                 choice = 0;
+                speed = speedini;
                 break;
             case 3:
                 system("cls");
                 carrera();
                 choice = 0;
+                speed = speedini;
                 break;
             case 4:
                 system("cls");
                 choque_los_5();
                 choice = 0;
+                speed = speedini;
                 break;
             case 5:
                 system("cls");
                 bateria();
                 choice = 0;
+                speed = speedini;
                 break;
             case 6:
                 system("cls");
@@ -107,7 +111,7 @@ int main(){
                 choice = 0;
 
         }
-        cout << endl << endl << endl << "Presione ENTER para continuar ";
+        cout << endl << endl << endl << "Presione cualquier tecla para continuar ";
         ch = getch();
 
     } while (choice != 6);
@@ -136,13 +140,18 @@ void choque (){
 while(1){
 
   for (int i = 0; i < 7; ++i) {
-    cout<< "Presione ENTER para volver al menu principal"<<endl;
+    cout<< "Presione ESC para volver al menu principal"<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(tabla[i]);
-    retardo(150000000);
+    retardo(speed);
     system("cls");
-    if(GetKeyState(13) & 0x8000){return;}
+    if ((speed - 5000000) > minspd){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
     }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
  }
+}
 }
 void carrera (){
   uint8_t tabla[] = {
@@ -150,15 +159,25 @@ void carrera (){
     0x10, 0x10, 0x88, 0x48, 0x24, 0x14,
     0xA, 0x6, 0x3,0x1
   };
+
+
 while(1){
+
   for (int i = 0; i < 16; ++i) {
-    cout<< "Presione ENTER para volver al menu principal"<<endl;
+    cout<< "Presione ESC para volver al menu principal"<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(tabla[i]);
-    retardo(150000000);
+    retardo(speed);
     system("cls");
 
 
-    if(GetKeyState(13) & 0x8000){return;}
+    if ((speed - 5000000) > minspd){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
+    }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
+
+
   }
 }
 }
@@ -167,23 +186,38 @@ void auto_fantastico(){
   while(1){
 
   for (int i = 0; i < 8; ++i) {
-    cout<< "Presione ENTER para volver al menu principal"<<endl;
+    cout<< "Presione ESC para volver al menu principal"<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(dato);
     dato >>= 1;
-    retardo(100000000);
-
+    retardo(speed);
     system("cls");
 
-    if(GetKeyState(13) & 0x8000){return;}
+    if ((speed - 5000000) > minspd){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
+    }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
+
+
   }
   dato = 0x02;
   for (int i = 0; i < 6; ++i) {
-    cout<< "Presione ENTER para volver al menu principal"<<endl;
+    cout<< "Presione ESC para volver al menu principal"<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(dato);
     dato <<= 1;
-    retardo(100000000);
+    retardo(speed);
     system("cls");
-    if(GetKeyState(13) & 0x8000){return;}
+
+
+    if ((speed - 5000000) > minspd){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
+    }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
+
+
   }
 }
 }
@@ -191,11 +225,18 @@ void choque_los_5(){
  unsigned char tabla []={0x0,0x81, 0xC3, 0xE7, 0xFF, 0xE7, 0xC3, 0x81};
     while (1) {
         for (int i = 0; i < 8; i++) {
-            cout<< "Presione ENTER para volver al menu principal"<<endl;
+            cout<< "Presione ESC para volver al menu principal"<<endl;
+            cout<<"Velocidad: "<<speed<<endl;
             mostrar(tabla[i]);
-            retardo(100000000);
+            retardo(speed);
             system("cls");
-            if(GetKeyState(13) & 0x8000){return;}
+
+
+    if ((speed - 5000000) > minspd){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
+    }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
     }
 }
 }
@@ -203,13 +244,22 @@ void bateria(){
     unsigned int dato = 0xFF;
   while(1){
   for (int i = 0; i < 9; ++i) {
-    cout<< "Presione ENTER para volver al menu principal"<<endl;
+    cout<< "Presione ESC para volver al menu principal"<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(dato);
     dato <<= 1;
-    retardo(100000000);
+    retardo(speed);
     system("cls");
-    if(GetKeyState(13) & 0x8000){return;}
+
+
+    if ((speed - 5000000) > minspd){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
+    }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
+
+    }
   }
 dato = 0xFF;
 }
-}
+
