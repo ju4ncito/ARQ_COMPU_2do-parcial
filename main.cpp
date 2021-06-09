@@ -10,15 +10,16 @@ using namespace std;
 
 void retardo (unsigned long int);
 void mostrar (unsigned char);
-void choque();
-void carrera();
-void auto_fantastico();
-void choque_los_5();
-void bateria();
-unsigned long int speedini = 151000000;
-unsigned long int speed = speedini;
-unsigned long int minspd = 1000000;
+void choque(unsigned long int);
+void carrera(unsigned long int);
+void auto_fantastico(unsigned long int);
+void choque_los_5(unsigned long int);
+void bateria(unsigned long int);
+
 int main(){
+
+unsigned long int speedini = 151000000;
+unsigned long int speed = speedini; // 1000000
 
 
    string pass;
@@ -73,31 +74,31 @@ int main(){
         switch (choice) {
             case 1:
                 system("cls");
-                choque();
+                choque(speed);
                 choice = 0;
                 speed = speedini;
                 break;
             case 2:
                 system("cls");
-                auto_fantastico();
+                auto_fantastico(speed);
                 choice = 0;
                 speed = speedini;
                 break;
             case 3:
                 system("cls");
-                carrera();
+                carrera(speed);
                 choice = 0;
                 speed = speedini;
                 break;
             case 4:
                 system("cls");
-                choque_los_5();
+                choque_los_5(speed);
                 choice = 0;
                 speed = speedini;
                 break;
             case 5:
                 system("cls");
-                bateria();
+                bateria(speed);
                 choice = 0;
                 speed = speedini;
                 break;
@@ -133,7 +134,7 @@ void mostrar (unsigned char dato){
         }
     }
 }
-void choque (){
+void choque (unsigned long int speed){
   uint8_t tabla[] = {
     0x81, 0x42, 0x24, 0x18, 0x18, 0x24, 0x42
   };
@@ -145,7 +146,7 @@ while(1){
     mostrar(tabla[i]);
     retardo(speed);
     system("cls");
-    if ((speed - 5000000) > minspd){
+    if ((speed - 5000000) > 1000000){
     if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
     }
     if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
@@ -153,7 +154,7 @@ while(1){
  }
 }
 }
-void carrera (){
+void carrera (unsigned long int speed){
   uint8_t tabla[] = {
     0x80, 0x80, 0x40, 0x40, 0x20, 0x20,
     0x10, 0x10, 0x88, 0x48, 0x24, 0x14,
@@ -171,7 +172,7 @@ while(1){
     system("cls");
 
 
-    if ((speed - 5000000) > minspd){
+    if ((speed - 5000000) > 1000000){
     if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
     }
     if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
@@ -181,7 +182,7 @@ while(1){
   }
 }
 }
-void auto_fantastico(){
+void auto_fantastico(unsigned long int speed){
   unsigned int dato = 0x80;
   while(1){
 
@@ -193,7 +194,7 @@ void auto_fantastico(){
     retardo(speed);
     system("cls");
 
-    if ((speed - 5000000) > minspd){
+    if ((speed - 5000000) > 1000000){
     if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
     }
     if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
@@ -211,7 +212,7 @@ void auto_fantastico(){
     system("cls");
 
 
-    if ((speed - 5000000) > minspd){
+    if ((speed - 5000000) > 1000000){
     if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
     }
     if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
@@ -221,7 +222,7 @@ void auto_fantastico(){
   }
 }
 }
-void choque_los_5(){
+void choque_los_5(unsigned long int speed){
  unsigned char tabla []={0x0,0x81, 0xC3, 0xE7, 0xFF, 0xE7, 0xC3, 0x81};
     while (1) {
         for (int i = 0; i < 8; i++) {
@@ -232,7 +233,7 @@ void choque_los_5(){
             system("cls");
 
 
-    if ((speed - 5000000) > minspd){
+    if ((speed - 5000000) > 1000000){
     if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
     }
     if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
@@ -240,7 +241,7 @@ void choque_los_5(){
     }
 }
 }
-void bateria(){
+void bateria(unsigned long int speed){
     unsigned int dato = 0xFF;
   while(1){
   for (int i = 0; i < 9; ++i) {
@@ -252,7 +253,7 @@ void bateria(){
     system("cls");
 
 
-    if ((speed - 5000000) > minspd){
+    if ((speed - 5000000) > 1000000){
     if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
     }
     if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
