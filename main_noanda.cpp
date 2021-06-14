@@ -8,20 +8,19 @@
 using namespace std;
 
 
-void retardo (unsigned long int);
+unsigned long int retardo (unsigned long int);
 void mostrar (unsigned char);
-void choque(unsigned long int);
+void choque(unsigned long int );
+/*
 void carrera(unsigned long int);
 void auto_fantastico(unsigned long int);
 void choque_los_5(unsigned long int);
 void bateria(unsigned long int);
+*/
 
 int main(){
 
-unsigned long int speedini = 151000000;
-unsigned long int speed = speedini; // 1000000
-
-
+   unsigned long int speed = 1510; // 1000000
    string pass;
    char ch;
    for (int i=1;i<4;i++){
@@ -55,7 +54,7 @@ unsigned long int speed = speedini; // 1000000
     }
 
     }
-  retardo(380000000);
+  //retardo(380000000);
         int choice = 0;
 
    do {
@@ -76,32 +75,33 @@ unsigned long int speed = speedini; // 1000000
                 system("cls");
                 choque(speed);
                 choice = 0;
-                speed = speedini;
+                speed = 1510;
                 break;
+                /*
             case 2:
                 system("cls");
                 auto_fantastico(speed);
                 choice = 0;
-                speed = speedini;
+                speed = 151000000;
                 break;
             case 3:
                 system("cls");
                 carrera(speed);
                 choice = 0;
-                speed = speedini;
+                speed = 151000000;
                 break;
             case 4:
                 system("cls");
                 choque_los_5(speed);
                 choice = 0;
-                speed = speedini;
+                speed = 151000000;
                 break;
             case 5:
                 system("cls");
                 bateria(speed);
                 choice = 0;
-                speed = speedini;
-                break;
+                speed = 151000000;
+                break;*/
             case 6:
                 system("cls");
                 cout<<"El sistema ha sido apagado"<<endl;
@@ -119,8 +119,26 @@ unsigned long int speed = speedini; // 1000000
     return 0;
 
 }
-void retardo(unsigned long int a){
-    while (a) a--;
+unsigned long int retardo(unsigned long int a){
+unsigned long int spd = a;
+    while (a){
+
+    if (((spd - 50) > 1500) && ((a - 50) > 1500)){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){
+            spd -= 50;
+            a -= 50;
+        }
+    }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){
+            spd += 50;
+            a+= 50;
+    }
+
+    a--;
+cout<<endl<<"el delay es "<<a;
+cout<<"\e[A";
+    }
+    return spd;
 }
 void mostrar (unsigned char dato){
   for (unsigned char mask = 128; mask > 0; mask>>=1)
@@ -135,6 +153,7 @@ void mostrar (unsigned char dato){
     }
 }
 void choque (unsigned long int speed){
+
   uint8_t tabla[] = {
     0x81, 0x42, 0x24, 0x18, 0x18, 0x24, 0x42
   };
@@ -142,18 +161,16 @@ while(1){
 
   for (int i = 0; i < 7; ++i) {
     cout<< "Presione ESC para volver al menu principal"<<endl;
-    cout<<"Delay: "<<speed<<endl;
+    //cout<<"Velocidad: "<<speed<<endl;
     mostrar(tabla[i]);
-    retardo(speed);
+    speed = retardo(speed);
     system("cls");
-    if ((speed - 5000000) > 1000000){
-    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
-    }
-    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
     if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
  }
 }
 }
+
+/*
 void carrera (unsigned long int speed){
   uint8_t tabla[] = {
     0x80, 0x80, 0x40, 0x40, 0x20, 0x20,
@@ -166,7 +183,7 @@ while(1){
 
   for (int i = 0; i < 16; ++i) {
     cout<< "Presione ESC para volver al menu principal"<<endl;
-    cout<<"Delay: "<<speed<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(tabla[i]);
     retardo(speed);
     system("cls");
@@ -184,28 +201,33 @@ while(1){
 }
 void auto_fantastico(unsigned long int speed){
   unsigned int dato = 0x80;
+  unsigned long int a = speed;
+  unsigned long int spd = speed;
   while(1){
 
   for (int i = 0; i < 8; ++i) {
     cout<< "Presione ESC para volver al menu principal"<<endl;
-    cout<<"Delay: "<<speed<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(dato);
     dato >>= 1;
-    retardo(speed);
+    while (a){
+         if ((a - 5000000) > 100000){
+    if(GetAsyncKeyState(VK_UP) & 0x0001){a -= 5000000;}
+    }
+    if(GetAsyncKeyState(VK_DOWN) & 0x0001){a += 5000000;}
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
+    a--;
+    }a--;
     system("cls");
 
-    if ((speed - 5000000) > 1000000){
-    if(GetAsyncKeyState(VK_UP) & 0x0001){speed -= 5000000;}
-    }
-    if(GetAsyncKeyState(VK_DOWN) & 0x0001){speed += 5000000;}
-    if(GetAsyncKeyState(VK_ESCAPE) & 0x0001){return;}
+
 
 
   }
   dato = 0x02;
   for (int i = 0; i < 6; ++i) {
     cout<< "Presione ESC para volver al menu principal"<<endl;
-    cout<<"Delay: "<<speed<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(dato);
     dato <<= 1;
     retardo(speed);
@@ -227,7 +249,7 @@ void choque_los_5(unsigned long int speed){
     while (1) {
         for (int i = 0; i < 8; i++) {
             cout<< "Presione ESC para volver al menu principal"<<endl;
-            cout<<"Delay: "<<speed<<endl;
+            cout<<"Velocidad: "<<speed<<endl;
             mostrar(tabla[i]);
             retardo(speed);
             system("cls");
@@ -246,7 +268,7 @@ void bateria(unsigned long int speed){
   while(1){
   for (int i = 0; i < 9; ++i) {
     cout<< "Presione ESC para volver al menu principal"<<endl;
-    cout<<"Delay: "<<speed<<endl;
+    cout<<"Velocidad: "<<speed<<endl;
     mostrar(dato);
     dato <<= 1;
     retardo(speed);
@@ -262,6 +284,6 @@ void bateria(unsigned long int speed){
     }
     dato = 0xFF;
   }
-
 }
 
+*/
